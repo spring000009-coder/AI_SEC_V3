@@ -18,4 +18,13 @@
         - css(D) : css 파일
         - images(D): 페이지 서비스 페이지 파일
 3.자연어 처리 모델
+    - 스미싱 문자 메세지 판별 위험도 모델
+    -ai_tools(D) :
+    - smithing_anal : 관련 모델 및 환경파일
+        -ai_files(D) :
+            config : 단어사전 및 최대길이등의 환경 데이터
+            nlp_smithing.keras : 사전 훈련된 모델
+            nlp_smithing.weights.h5 : 별도로 저장된 모델의 가중치
+            vectornize : TextVecternize 전처리 객체
+        -smns_model.py :훈련된 모델 임포트와 interface_service.py 와 연동하여 서비스 제공
 </pre>
