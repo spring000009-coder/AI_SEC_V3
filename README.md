@@ -4,8 +4,9 @@
     - https://colab.research.google.com/drive/1Pd39mcBJVAIu6TnIyDqQKgn3sk4GWhOx
     - Boston housing Data 활용, google colab edit 활용, tensorflow,korea 라리브러리 활용
     - 결과 - 딥러닝모델로 구성시 성능향상이 있었다
-2. 시계열 모델
-    - SOURCE file
+    
+2. 시계열 모델 , 자연어 처리 모델
+    - 가상화폐 가격분석 예측 SOURCE file
         - WEB_SERVICE.PY : 프라스크 웹 라우팅
         - AI_TOOLS : AL 관련 모델 및 도구
             - interface_service.py : 모델 예측 서비스 연동 인터페이스
@@ -17,7 +18,7 @@
         -apps(D) : javascript 파일
         - css(D) : css 파일
         - images(D): 페이지 서비스 페이지 파일
-3.자연어 처리 모델
+
     - 스미싱 문자 메세지 판별 위험도 모델
     -ai_tools(D) :
     - smithing_anal : 관련 모델 및 환경파일
