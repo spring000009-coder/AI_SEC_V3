@@ -47,3 +47,6 @@ section{clear:both;
     float:left;margin:0.5rem;padding:0.5rem}
 .unit_title{display:inline-block;width:8rem}
 .unit_val{display:inline-block;width:6.2rem;text-align:right}
+.oval{display:inline-block;
+    color:white;border-radius:50%;
+    width:4rem;height:4rem;line-height:4rem;text-align:center}

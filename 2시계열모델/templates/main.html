@@ -25,16 +25,16 @@
                 가상화폐 코인 가격 예측 분석
             " info="coin"> ☣ 코인 가격 분석</li>
             <li describ="
-                영화리뷰 / 쇼핑리뷰 분석
-            " info="npl"> 👱🏽‍♀️ 자연어 처리 분석</li>
+                문자메시지 / 영화리뷰 / 쇼핑리뷰 분석
+            " info="sms"> 👱🏽‍♀️ 자연어 처리 분석</li>
             <li describ="
-                적대적섭동 및 패치공격 강화 솔루션
+                적대적생성 및 패치공격 강화 솔루션
             " info="gen"> 🎞 적대적 생성형</li>
         </ul>
     </nav>
     <section>
         <img id="coin" class="sec_img" src="{{url_for('static',filename='images/coin_img.png')}}"/>
-        <img id="npl" class="sec_img" src="{{url_for('static',filename='images/npl_img.png')}}"/>
+        <img id="sms" class="sec_img" src="{{url_for('static',filename='images/sms_img.png')}}"/>
         <img id="gen" class="sec_img" src="{{url_for('static',filename='images/gen_img.png')}}"/>
     </section>
     <footer> 🎎🎎 develop since 2026 ~ c.e.h </footer>
@@ -44,55 +44,16 @@
             close
     </span>
     <div class="coverui" id="anal_content">
-        <h3 information=""></h3><!--가상화폐 코인 가격 예측분석 화면비율 30%-->
+        <h3 information=""></h3>
         <div id="user_data" style="position:relative;height:calc(30% - 0.5rem);
                 background:rgba(0,0,255,0.2)">
-            <div>
-                <label>화 폐 명 <select id="coin_name">
-                    <option value="btc">BTC(비트코인)</option>
-                    <option value="eth">ETH(이더리움)</option>
-                    <option value="xrp">XRP(리플)</option>
-                </select></label>
-                <label>분석모델 <select id="cmodel">
-                    <option>L S T M</option>
-                    <option>CONVLSTM</option>
-                </select></label><br>
-                <label>분석일수 <input id="cday" type="number" value="5"></label>
-                <div style="position:absolute;bottom:1rem;width:100%">
-                <button id="analbtn" style="height:2rem;width:100%;
-                ">분석하기</button></div>
-            </div>
+
         </div>
-        <div id="result_data" style="height:calc(70% - 0.5rem);background:lightgray">
-        <!--가상화폐 코인 가격 예측분석 화면비율 70%-->
+        <button id="analbtn" style="height:2rem;width:100%;">분석하기</button>
+        <div id="result_data" style="overflow-y:auto;height:calc(62% - 0.5rem);background:lightgray">
+
         </div>
     </div>
 
 </body>
 </html>
-<!--            <h4>분석결과 표기</h4>-->
-<!--            <div>-->
-<!--                <div class="box">-->
-<!--                    <p>오늘 가격정보</p>-->
-<!--                    <p><span>최고가</span><span></span></p>-->
-<!--                    <p><span>종 &nbsp;가</span><span></span></p>-->
-<!--                    <p><span>최저가</span><span></span></p>-->
-<!--                    <p><span>등락율</span><span></span></p>-->
-<!--                </div>-->
-<!--&lt;!&ndash;                //현재가격정보 DarkRed  배경 - 가격상승, DarkGreen - 가격 하락정보&ndash;&gt;-->
-<!--&lt;!&ndash;                // 예측 가격 정보 LightCoral  배경- 가격상승예측, LightGreen 배경 하락정보&ndash;&gt;-->
-<!--                <div class="box" style="background:DarkRed;color:white">-->
-<!--                    <p>2/28일 예측정보</p>-->
-<!--                    <p><span>최고가</span><span>350</span></p>-->
-<!--                    <p><span>종 &nbsp;가</span><span>340</span></p>-->
-<!--                    <p><span>최저가</span><span></span>320</p>-->
-<!--                    <p><span>등락율</span><span></span>+10%</p>-->
-<!--                </div>-->
-<!--                <div class="box">-->
-<!--                    <p>3/1일 예측정보</p>-->
-<!--                    <p><span>최고가</span><span></span></p>-->
-<!--                    <p><span>종 &nbsp;가</span><span></span></p>-->
-<!--                    <p><span>최저가</span><span></span></p>-->
-<!--                    <p><span>등락율</span><span></span></p>-->
-<!--                </div>-->
-<!--            </div>-->

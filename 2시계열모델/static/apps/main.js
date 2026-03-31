@@ -15,10 +15,26 @@ $(()=>{
         }
     })
     $("li").on("click",function(){
+        $("#result_data").html("")
+        const info = $(this).attr("info")
+        const container = $("#user_data")
+        if(info=="coin"){
+            $("#analbtn").text("코인분석하기")
+            container.html(coin_ui)
+        }else if(info=="sms"){
+            $("#analbtn").text("문자분석하기")
+            container.html(sms_ui)
+            $("#sms_msg").val("")
+        }
+        else if(info=="gen"){
+            container.html(gen_ui)
+            //???????????????????????
+            $("#analbtn").text("이미지생성하기")
+        }
         $("#anal_content h3").text($(this).attr("describ"));
         $(".coverui").css("display","block")
         //서버로 보낼 메뉴의 종류 타입 설정
-        $("#anal_content h3").attr("information",$(this).attr("info"))
+        $("#anal_content h3").attr("information",info)
     })
     $("#x_btn,#anal_win").on("click",function(){
         $(".coverui").css("display","none")
@@ -32,6 +48,14 @@ $(()=>{
             const coin_model = $("#cmodel").val()
             const coin_day = $("#cday").val()
             datas={information,coin_name,coin_model,coin_day}
+        }else if(information=="sms"){
+            if(!$("#sms_msg").val()){
+                alert("문구를 입력하세요")
+                return
+            }
+            datas = {information:"sms",sms_message:$("#sms_msg").val()}
+        }else if(information=="gen"){
+            datas = {information:"gen",loc_val:$("#loc_val").val(),scale_val:$("#scale_val").val()}
         }
         const res = await fetch("/analize",
             {method:"POST",
@@ -42,11 +66,52 @@ $(()=>{
             }
          )
         const resp = await res.json()
-        //console.log(resp)
-        create_coinui(resp)
+        console.log(resp)
+        if(information=="coin"){
+           create_coinui(resp)
+        }else if(information=="sms"){
+            create_smsui(resp,$("#sms_msg").val())
+            $("#sms_msg").val("")
+        }else if(information=="gen"){
+            create_genui(resp)
+        }
     })
 })
-
+function create_genui(img_path){
+    const jq_res = $("#result_data")
+    let inHtml =`<h4>분석결과 표기</h4>`
+    if($("#result_data img").size()){
+        $("#result_data").append(
+            `<img src="/static/${img_path}" style="width:96px;height:96px}"/>`
+        )
+    }else{
+        inHtml+=`<img src="/static/${img_path}" style="width:96px;height:96px}"/>`
+        jq_res.html(inHtml)
+    }
+}
+function create_smsui(ui_datas,message){
+    const jq_res = $("#result_data")
+    let inHtml = `<h4>분석결과 표기</h4>`
+    const maxval = Math.max(ui_datas[0][0],ui_datas[0][1],ui_datas[0][2])
+    const oval = `
+    <div>
+        <span style="margin-right:1rem;display:inline-block;width:68%;height:3rem">
+            ${message}
+        </span>
+        <span>${(maxval*100).toFixed(2)}% 확률로 ${ui_datas[1]}</span>
+        <span class="oval" style="background:darkgreen">
+            ${(ui_datas[0][0]*100).toFixed(2)}%
+        </span>
+        <span class="oval" style="background:darkred">
+            ${(ui_datas[0][1]*100).toFixed(2)}%
+        </span>
+        <span class="oval" style="background:gold">
+            ${(ui_datas[0][2]*100).toFixed(2)}%
+        </span>
+    </div>
+      `
+    jq_res.append(oval)
+}
 function create_coinui(ui_datas){
     const jq_res = $("#result_data")
     let inHtml = `<h4>분석결과 표기</h4>`
@@ -154,3 +219,35 @@ function create_coinui(ui_datas){
 //        <p><span>등락율</span><span></span></p>
 //    </div>
 //</div>
+const coin_ui = `
+<div>
+    <label>화 폐 명 <select id="coin_name">
+        <option value="btc">BTC(비트코인)</option>
+        <option value="eth">ETH(이더리움)</option>
+        <option value="xrp">XRP(리플)</option>
+    </select></label>
+    <label>분석모델 <select id="cmodel">
+        <option>L S T M</option>
+        <option>CONVLSTM</option>
+    </select></label><br>
+    <label>분석일수 <input id="cday" type="number" value="5"></label>
+</div>
+`
+const sms_ui = `
+<div>
+    <label>수신된 문자메시지를 입력하세요 <br>
+        <textarea cols=100 rows=5 id="sms_msg"
+         style="margin-bottom:1vh;padding:1rem">
+        </textarea>
+    </label>
+</div>
+`
+const gen_ui = `
+<div STYLE="padding:1rem">
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" placeholder="이미지업로드 아지 미지원입니다">
+        <label>loc value <input id="loc_val" type="number" value="0.0" max="3.0" min="-3.0 placehoder="loc 값을 입력하세요"/></label>
+        <label>scale value <input id="scale_val" type="number" value="1.0" max="3.0" min="-3.0 placehoder="scale 값을 입력하세요"/></label>
+    </form>
+</div>
+`
